@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OMEGA Mobile Money</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#050b20;color:#eef3ff}button,input,select{font:inherit}
+:root{--bg:#050b20;--panel:#0b1230;--panel2:#0d173b;--line:#23315d;--blue:#2166ff;--cyan:#00b9ff;--green:#00d68f;--pink:#d936ff;--yellow:#ffc21a;--red:#ff4d67;--muted:#9ba8c7}
+.hidden{display:none!important}.login{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 20% 10%,#123a7a 0,#07102b 38%,#030713 100%);padding:20px}.loginbox{width:min(410px,94vw);background:#0a1230eF;border:1px solid #33457a;border-radius:24px;padding:34px;box-shadow:0 30px 90px #0009;text-align:center}.brandlogo{width:90px;height:90px;margin:auto;border-radius:26px;background:linear-gradient(135deg,#1eff70,#00aaff 60%,#303cff);display:grid;place-items:center;font-weight:1000;font-size:30px;color:#041022;box-shadow:0 0 35px #008cff66}.loginbox h1{margin:18px 0 4px;font-size:27px}.loginbox p{color:var(--muted);margin:5px 0 24px}.pass{position:relative}.pass input{padding-right:48px}.eye{position:absolute;right:8px;top:7px;border:0;background:none;color:#aab7d3;cursor:pointer;font-size:19px}.login input,.modal input,.modal select,.search{width:100%;padding:13px;border:1px solid #33436f;border-radius:11px;background:#080f27;color:#fff;outline:0}.btn{border:0;border-radius:10px;padding:11px 15px;background:#17264c;color:#fff;cursor:pointer;font-weight:700}.primary{background:linear-gradient(90deg,#1456ff,#0e9eff)}.success{background:#009e70}.danger{background:#b92f4b}.login .btn{width:100%;margin-top:14px;padding:14px}.err{height:20px;color:#ff7184;font-size:13px}
+.app{display:none;min-height:100vh}.app.ready{animation:omegaIn .35s ease-out}@keyframes omegaIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:linear-gradient(180deg,#050a20,#07112b);border-right:1px solid #24345d;z-index:20;overflow:auto}.sidebrand{padding:22px 18px 17px;border-bottom:1px solid #1e2b50;display:flex;align-items:center;gap:11px}.sidebrand .slogo{width:47px;height:47px;border-radius:15px;background:linear-gradient(135deg,#20ee69,#00a8ff);display:grid;place-items:center;color:#051027;font-weight:1000}.sidebrand strong{font-size:21px}.sidebrand small{display:block;color:#aebbd5;font-size:10px;letter-spacing:.7px}.nav{padding:12px}.nav button{width:100%;display:flex;gap:12px;align-items:center;border:0;background:transparent;color:#cbd5ec;padding:12px 13px;border-radius:9px;text-align:left;cursor:pointer;margin:2px 0}.nav button:hover,.nav button.active{background:linear-gradient(90deg,#1749dc,#153ba4);color:#fff;box-shadow:0 5px 18px #1749dc44}.nav .icon{width:24px;text-align:center;font-size:18px}.nav .new{margin-left:auto;background:#00b982;color:#021b15;font-size:10px;padding:2px 6px;border-radius:5px;font-weight:900}.logout{margin-top:12px!important;color:#ff6277!important;border-top:1px solid #1e2b50;padding-top:15px!important}
+.main{margin-left:250px;min-height:100vh}.top{height:91px;padding:17px 25px;display:flex;align-items:center;gap:20px;border-bottom:1px solid #17244a;background:#060b20;position:sticky;top:0;z-index:10}.hamb{display:none;background:none;border:0;color:#fff;font-size:25px}.welcome{flex:1}.welcome .hello{font-size:14px;color:#d6def1}.welcome h2{margin:2px 0;font-size:22px}.welcome small{color:#8998bb}.player{width:350px;height:72px;border:1px solid #263a73;background:linear-gradient(90deg,#11165a,#141b4d);border-radius:12px;padding:9px 13px;display:flex;align-items:center;gap:11px}.note{font-size:26px;color:#9c36ff}.bars{height:35px;flex:1;background:repeating-linear-gradient(90deg,transparent 0 5px,#7c35ff 5px 7px,transparent 7px 11px);opacity:.65}.sound-control{border:1px solid #39456d;background:#111a35;color:#fff;border-radius:12px;padding:10px 12px;font-size:16px;cursor:pointer;margin-right:7px}.sound-control.off{opacity:.55}
+.play{width:38px;height:38px;border-radius:50%;border:0;background:#5421b9;color:#fff;font-size:17px}.profile{display:flex;align-items:center;gap:10px}.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ffa76b,#39e8a7);font-weight:900}.profile small{display:block;color:#98a7c6}.content{padding:20px 18px;max-width:1500px;margin:auto}.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:linear-gradient(180deg,#0b1433,#0a112c);border:1px solid #283a70;border-radius:13px;padding:18px;box-shadow:0 9px 25px #0003}.stat{min-height:142px;position:relative;overflow:hidden}.stat h4{margin:0;color:#aab7d5;font-size:14px}.stat strong{display:block;font-size:25px;margin-top:16px}.stat .trend{font-size:12px;margin-top:10px;color:#21e4a0}.stat .trend.down{color:#ff6580}.stat .sicon{position:absolute;right:16px;top:17px;font-size:26px;padding:10px;border-radius:12px;background:#15357a;color:#51b6ff}.grid3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-top:16px}.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-top:16px}.title{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.title h3{margin:0;font-size:16px}.muted{color:var(--muted)}.chart{height:245px;position:relative}.chart svg{width:100%;height:100%}.donut{width:165px;height:165px;border-radius:50%;background:conic-gradient(#11a9ff 0 45%,#00d98a 45% 70%,#9d28ff 70% 90%,#ffc21a 90%);position:relative;margin:12px auto}.donut:after{content:"100%";position:absolute;inset:38px;border-radius:50%;background:#0b1433;display:grid;place-items:center;font-weight:800}.legend div{display:flex;justify-content:space-between;padding:7px 0;font-size:12px}.dot{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:7px}.recent{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #1b294f}.recent:last-child{border:0}.ricon{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#0b654f;color:#00e39c}.rmain{flex:1}.rmain strong{display:block;font-size:13px}.rmain small{color:#8f9dbb}.amount{font-weight:800;color:#00df95}.amount.red{color:#ff5570}.badge{padding:5px 8px;border-radius:6px;background:#063e35;color:#00e2a0;font-size:11px}.badge.red{background:#45142b;color:#ff6379}.quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}.quick button{min-height:100px;background:#0b1433;border:1px solid #283968;border-radius:11px;color:#fff;cursor:pointer}.quick button:hover{border-color:#3f76ff;transform:translateY(-1px)}.quick b{display:block;margin-top:8px}.statusrow{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #1d2a4d;font-size:13px}.online{color:#00dc94;background:#073b32;padding:4px 8px;border-radius:7px}.calendar .event{background:#0d193b;border:1px solid #24345f;border-radius:9px;padding:11px;margin:9px 0}.event b{display:block}.footer{border-top:1px solid #17244a;margin-top:18px;padding:13px;color:#7584a5;font-size:12px;display:flex;justify-content:space-between}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px}.toolbar>*{width:auto!important}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:12px;border-bottom:1px solid #1b294e;text-align:left;font-size:12px;white-space:nowrap}.table th{color:#91a0c0;background:#0a1330}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.form label{display:block;color:#94a2bf;font-size:12px;margin-bottom:5px}.form input,.form select,.form textarea{width:100%;padding:12px;border:1px solid #2a3a68;border-radius:9px;background:#080f27;color:#fff}.form textarea{min-height:100px}.full{grid-column:1/-1}.empty{text-align:center;color:#7e8cac;padding:30px}.modalbg{display:none;position:fixed;inset:0;background:#0009;z-index:100;place-items:center;padding:15px}.modal{width:min(520px,96vw);background:#0b1433;border:1px solid #324578;border-radius:17px;padding:20px}.modal h3{margin-top:0}.close{float:right;border:0;background:none;color:#fff;font-size:22px}.toast{position:fixed;right:20px;bottom:20px;background:#10234d;border:1px solid #33518e;padding:12px 17px;border-radius:10px;display:none;z-index:200}
+@media(max-width:1100px){.cards{grid-template-columns:1fr 1fr}.grid3,.grid2{grid-template-columns:1fr}.player{display:none}}
+@media(max-width:800px){.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.open{transform:none}.main{margin-left:0}.hamb{display:block}.top{padding:12px}.cards{grid-template-columns:1fr 1fr}.content{padding:13px}.form{grid-template-columns:1fr}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}.profile div:not(.avatar){display:none}.top{height:70px}.welcome h2{font-size:18px}}
+</style>
+</head>
+<body>
+
+<section id="login" class="login">
+ <div class="loginbox">
+  <div class="brandlogo">Ω</div>
+  <h1>WELCOME TO OMEGA</h1>
+  <p>MFUMO WA USIMAMIZI WA MOBILE MONEY</p>
+  <div class="pass"><input id="loginPass" type="password" placeholder="Ingiza nywila" onkeydown="if(event.key==='Enter')doLogin()"><button class="eye" onclick="togglePass('loginPass')">👁</button></div>
+  <button id="loginBtn" class="btn primary" onclick="doLogin()">INGIA KWENYE MFUMO</button>
+  <div id="loginErr" class="err"></div>
+  <small class="muted">🔒 Salama • Haraka • Rahisi</small>
+ </div>
+</section>
+
+<section id="app" class="app">
+<aside id="sidebar" class="sidebar">
+ <div class="sidebrand"><div class="slogo">Ω</div><div><strong>OMEGA</strong><small>MOBILE MONEY</small></div></div>
+ <nav class="nav">
+  <button class="active" onclick="go('dashboard',this)">▦ <span>Dashibodi</span></button>
+  <button onclick="go('transactions',this)">⇄ <span>Miamala</span></button>
+  <button onclick="go('customers',this)">♟ <span>Wateja</span></button>
+  <button onclick="go('orders',this)">▣ <span>Oda</span></button>
+  <button onclick="go('payments',this)">▣ <span>Malipo</span></button>
+  <button onclick="go('payouts',this)">↥ <span>Payouts</span></button>
+  <button onclick="go('reports',this)">▥ <span>Ripoti</span></button>
+  <button onclick="go('sms',this)">▱ <span>SMS</span><span class="new">Mpya</span></button>
+  <button onclick="go('locations',this)">⌖ <span>Kata / Maeneo</span></button>
+  <button onclick="go('users',this)">♟ <span>Watumiaji & Majukumu</span></button>
+  <button onclick="go('settings',this)">⚙ <span>Mipangilio</span></button>
+  <button onclick="go('password',this)">🔑 <span>Badilisha Nywila</span></button>
+  <button onclick="go('logs',this)">▣ <span>Rekodi za Shughuli</span></button>
+  <button onclick="backup()">▣ <span>Hifadhi Nakala</span></button>
+  <button onclick="go('help',this)">? <span>Msaada</span></button>
+  <button class="logout" onclick="logout()">⇥ <span>Toka</span></button>
+ </nav>
+</aside>
+
+<div class="main">
+ <header class="top">
+  <button class="hamb" onclick="sidebar.classList.toggle('open')">☰</button>
+  <div class="welcome"><div class="hello">Karibu tena,</div><h2 id="topTitle">Omega Mobile Money 👋</h2><small>Fanya miamala kwa haraka, salama na uhakika.</small></div>
+  <div class="player"><span class="note">♫</span><div style="flex:1"><small style="color:#a8b2ce">Inacheza sasa</small><br><b>Welcome to Omega Mobile Money</b><div class="bars"></div></div><button class="sound-control" id="soundBtn" onclick="toggleOmegaSound()" title="Washa/Zima sauti">🔊</button><button class="play" onclick="welcomeSound()" title="Cheza tena">▶</button></div>
+  <div class="profile"><span>🔔</span><div class="avatar">Ω</div><div><b>Omega</b><small>Mmiliki wa Mfumo</small></div></div>
+ </header>
+
+ <main class="content">
+
+ <section id="dashboard" class="page active">
+  <div class="cards">
+   <div class="card stat"><h4>Miamala Leo</h4><strong id="todayAmount">TZS 0</strong><div class="trend">↗ 18.6% kutoka jana</div><div class="sicon">↗</div></div>
+   <div class="card stat"><h4>Miamala Jumla</h4><strong id="monthAmount">TZS 0</strong><div class="trend">↗ mwezi huu</div><div class="sicon" style="color:#00df95">＄</div></div>
+   <div class="card stat"><h4>Wateja</h4><strong id="customerCount">0</strong><div class="trend">↗ mwezi huu</div><div class="sicon" style="color:#ff55dd">♟</div></div>
+   <div class="card stat"><h4>Oda Zilizokamilika</h4><strong id="orderCount">0</strong><div class="trend">↗ wiki hii</div><div class="sicon" style="color:#ffd01e">🛒</div></div>
+  </div>
+  <div class="grid3">
+   <div class="card"><div class="title"><h3>Mwenendo wa Miamala</h3><select id="chartPeriod" onchange="renderChart()" style="background:#0b1433;color:#fff;border:1px solid #2a3a68;border-radius:8px;padding:8px"><option>Mwezi Huu</option><option>Wiki Hii</option></select></div><div class="chart"><svg viewBox="0 0 700 250" preserveAspectRatio="none"><g stroke="#182750" stroke-width="1"><line x1="30" y1="30" x2="680" y2="30"/><line x1="30" y1="85" x2="680" y2="85"/><line x1="30" y1="140" x2="680" y2="140"/><line x1="30" y1="195" x2="680" y2="195"/></g><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#1467ff" stop-opacity=".5"/><stop offset="1" stop-color="#1467ff" stop-opacity="0"/></linearGradient></defs><path id="area" fill="url(#fill)"></path><path id="line" fill="none" stroke="#2980ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><g id="points"></g></svg></div></div>
+   <div class="card"><div class="title"><h3>Aina za Miamala</h3></div><div class="donut"></div><div class="legend"><div><span><i class="dot" style="background:#11a9ff"></i>Malipo ya Bidhaa</span><b>45%</b></div><div><span><i class="dot" style="background:#00d98a"></i>Payouts</span><b>25%</b></div><div><span><i class="dot" style="background:#9d28ff"></i>Malipo ya Huduma</span><b>20%</b></div><div><span><i class="dot" style="background:#ffc21a"></i>Refunds</span><b>10%</b></div></div></div>
+   <div class="card"><div class="title"><h3>Hali ya Mfumo</h3></div><div class="statusrow"><span>🔐 PayIn API</span><span class="online">Imeunganishwa</span></div><div class="statusrow"><span>✉ SMS Gateway</span><span class="online">Imeunganishwa</span></div><div class="statusrow"><span>▤ Database</span><span class="online">Online</span></div><div class="statusrow"><span>▤ Server</span><span class="online">Inafanya</span></div><div style="display:flex;gap:10px;margin-top:12px"><div class="card" style="padding:12px;flex:1"><small class="muted">Uptime</small><br><b style="color:#00dc94">99.9%</b></div><div class="card" style="padding:12px;flex:1"><small class="muted">Toleo</small><br><b>v1.0</b></div></div></div>
+  </div>
+  <div class="grid2">
+   <div class="card"><div class="title"><h3>Miamala ya Hivi Karibuni</h3><button class="btn" onclick="go('transactions')">Ona Yote</button></div><div id="recent"></div></div>
+   <div class="card"><div class="title"><h3>Haraka</h3></div><div class="quick"><button onclick="openTx()"><span style="font-size:27px;color:#3289ff">⊕</span><b>Muamala Mpya</b></button><button onclick="openCustomer()"><span style="font-size:27px;color:#00dba0">♟+</span><b>Ongeza Mteja</b></button><button onclick="openOrder()"><span style="font-size:27px;color:#ff5374">🛒+</span><b>Oda Mpya</b></button><button onclick="go('sms')"><span style="font-size:27px;color:#22baff">➤</span><b>Tuma SMS</b></button><button onclick="go('reports')"><span style="font-size:27px;color:#ffc21a">▥</span><b>Ripoti</b></button><button onclick="go('settings')"><span style="font-size:27px">⚙</span><b>Mipangilio</b></button></div></div>
+  </div>
+  <div class="footer"><span>© 2026 Omega Mobile Money. Haki zote zimehifadhiwa.</span><span>Imeundwa kwa ❤️ na Omega System</span></div>
+ </section>
+
+ <section id="transactions" class="page"><div class="card"><div class="title"><h3>⇄ Miamala</h3><button class="btn primary" onclick="openTx()">+ Muamala Mpya</button></div><div class="toolbar"><input class="search" id="txSearch" placeholder="Tafuta ID au namba..." oninput="renderTransactions()"><select class="search" id="txNetwork" onchange="renderTransactions()"><option value="">Mitandao yote</option><option>M-Pesa</option><option>Airtel Money</option><option>Mixx by Yas</option><option>HaloPesa</option></select><select class="search" id="txStatus" onchange="renderTransactions()"><option value="">Hali zote</option><option>Imekamilika</option><option>Inasubiri</option><option>Imeshindikana</option></select></div><div class="tablewrap"><table class="table"><thead><tr><th>Tarehe</th><th>Mtandao</th><th>ID</th><th>Namba</th><th>Kiasi</th><th>Commission</th><th>Faida</th><th>Hali</th></tr></thead><tbody id="txTable"></tbody></table></div></div></section>
+
+ <section id="customers" class="page"><div class="card"><div class="title"><h3>♟ Wateja</h3><button class="btn primary" onclick="openCustomer()">+ Ongeza Mteja</button></div><div class="toolbar"><input class="search" id="custSearch" placeholder="Tafuta mteja..." oninput="renderCustomers()"></div><div class="tablewrap"><table class="table"><thead><tr><th>Jina</th><th>Namba</th><th>Kata/Maeneo</th><th>Miamala</th><th>Imejiunga</th></tr></thead><tbody id="custTable"></tbody></table></div></div></section>
+
+ <section id="orders" class="page"><div class="card"><div class="title"><h3>▣ Oda</h3><button class="btn primary" onclick="openOrder()">+ Oda Mpya</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Oda</th><th>Mteja</th><th>Kiasi</th><th>Status</th><th>Tarehe</th></tr></thead><tbody id="orderTable"></tbody></table></div></div></section>
+
+ <section id="payments" class="page"><div class="card"><div class="title"><h3>▣ Malipo</h3></div><div class="cards"><div class="card stat"><h4>Malipo Yaliyokamilika</h4><strong id="payCount">0</strong></div><div class="card stat"><h4>Kiasi</h4><strong id="payAmount">TZS 0</strong></div></div></div></section>
+ <section id="payouts" class="page"><div class="card"><div class="title"><h3>↥ Payouts</h3></div><p class="muted">Simamia malipo yanayotumwa kwa wateja/mawakala.</p><div class="tablewrap"><table class="table"><thead><tr><th>ID</th><th>Mteja</th><th>Kiasi</th><th>Hali</th></tr></thead><tbody id="payoutTable"></tbody></table></div></div></section>
+
+ <section id="reports" class="page"><div class="cards"><div class="card stat"><h4>Mapato Leo</h4><strong id="repToday">TZS 0</strong></div><div class="card stat"><h4>Mapato Mwezi</h4><strong id="repMonth">TZS 0</strong></div><div class="card stat"><h4>Commission Mwezi</h4><strong id="repComm">TZS 0</strong></div><div class="card stat"><h4>Faida Mwezi</h4><strong id="repProfit">TZS 0</strong></div></div><div class="card" style="margin-top:16px"><h3>Ripoti kwa Mtandao</h3><div id="networkReport"></div></div></section>
+
+ <section id="sms" class="page"><div class="grid2"><div class="card"><div class="title"><h3>✉ Tuma SMS</h3></div><div class="form"><div><label>Namba</label><input id="smsPhone" placeholder="07xxxxxxxx"></div><div><label>Aina</label><select id="smsType"><option>Ujumbe wa kawaida</option><option>Uthibitisho wa malipo</option><option>Ujumbe wa oda</option></select></div><div class="full"><label>Ujumbe</label><textarea id="smsText" placeholder="Andika ujumbe..."></textarea></div><div><button class="btn success" onclick="sendSMS()">Tuma SMS</button></div></div></div><div class="card"><h3>Hali ya SMS Gateway</h3><div class="statusrow"><span>Gateway</span><span class="online">Imeunganishwa</span></div><div class="statusrow"><span>SMS zilizotumwa leo</span><b id="smsCount">0</b></div><p class="muted">Uunganishaji wa kweli wa SMS/API unahitaji credentials za gateway kwenye backend.</p></div></div></section>
+
+ <section id="locations" class="page"><div class="card"><div class="title"><h3>⌖ Kata / Maeneo</h3><button class="btn primary" onclick="addLocation()">+ Ongeza Eneo</button></div><div id="locationsList"></div></div></section>
+ <section id="users" class="page"><div class="card"><div class="title"><h3>♟ Watumiaji & Majukumu</h3><button class="btn primary" onclick="addUser()">+ Mtumiaji</button></div><div id="usersList"></div></div></section>
+ <section id="settings" class="page"><div class="grid2"><div class="card"><h3>⚙ Mipangilio</h3><div class="statusrow"><span>Arifa za mfumo</span><input type="checkbox" checked></div><div class="statusrow"><span>Uthibitisho kabla ya kufuta</span><input type="checkbox" checked></div><div class="statusrow"><span>Sauti ya Karibu (Mara moja ukiingia)</span><input id="soundToggle" type="checkbox" checked></div><p class="muted">Jina la mfumo: <b>OMEGA</b><br>Mmiliki: <b>Omega</b></p></div><div class="card"><h3>API / Gateway</h3><div class="statusrow"><span>PayIn API</span><span class="online">Imeunganishwa</span></div><div class="statusrow"><span>SMS Gateway</span><span class="online">Imeunganishwa</span></div><p class="muted">API key na secret zihifadhiwe kwenye Environment Variables za backend, si ndani ya HTML.</p></div></div></section>
+ <section id="password" class="page"><div class="card" style="max-width:600px"><h3>🔑 Badilisha Nywila</h3><div class="form"><div class="full"><label>Nywila ya sasa</label><div class="pass"><input id="oldPass" type="password"><button class="eye" onclick="togglePass('oldPass')">👁</button></div></div><div><label>Nywila mpya</label><div class="pass"><input id="newPass" type="password"><button class="eye" onclick="togglePass('newPass')">👁</button></div></div><div><label>Rudia nywila mpya</label><div class="pass"><input id="newPass2" type="password"><button class="eye" onclick="togglePass('newPass2')">👁</button></div></div><div><button class="btn success" onclick="changePassword()">Hifadhi Nywila</button></div></div><p id="passMsg" class="muted"></p></div></section>
+ <section id="logs" class="page"><div class="card"><div class="title"><h3>▣ Rekodi za Shughuli</h3></div><div id="logsList"></div></div></section>
+ <section id="help" class="page"><div class="card"><h3>? Msaada & Support</h3><p>Karibu kwenye Omega Mobile Money.</p><div class="notice" style="background:#101d42;padding:15px;border-radius:10px;color:#b9c6df">Kwa kuunganisha miamala ya moja kwa moja kutoka M-Pesa, Airtel Money, Mixx by Yas na HaloPesa, mfumo huu unahitaji API/gateway halisi na webhook ya backend. HTML hii ni dashboard yenye storage ya ndani na sehemu tayari za integration.</div></div></section>
+
+ </main>
+</div>
+</section>
+
+<div id="modalbg" class="modalbg"><div class="modal"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const PASSKEY='omega_password_v1', TXKEY='omega_tx_v1', CKEY='omega_customers_v1', OKEY='omega_orders_v1', LKEY='omega_logs_v1';
+if(!localStorage.getItem(PASSKEY))localStorage.setItem(PASSKEY,'Jasi@2003');
+let tx=JSON.parse(localStorage.getItem(TXKEY)||'[]'), customers=JSON.parse(localStorage.getItem(CKEY)||'[]'), orders=JSON.parse(localStorage.getItem(OKEY)||'[]'), logs=JSON.parse(localStorage.getItem(LKEY)||'[]');
+const money=n=>'TZS '+Number(n||0).toLocaleString('en-TZ');
+(function exposeOmegaElements(){
+  document.querySelectorAll('[id]').forEach(el=>{
+    if(el.id==='login') return;
+    if(!window[el.id]) window[el.id]=el;
+  });
+})();
+function togglePass(id){const e=document.getElementById(id);if(e)e.type=e.type==='password'?'text':'password'}
+function doLogin(){
+  const passEl=document.getElementById('loginPass');
+  const errEl=document.getElementById('loginErr');
+  const loginEl=document.getElementById('login');
+  const appEl=document.getElementById('app');
+  const entered=(passEl.value||'').trim();
+  const saved=localStorage.getItem(PASSKEY)||'Jasi@2003';
+  errEl.textContent='';
+  if(entered===saved){
+    loginEl.classList.add('hidden');
+    loginEl.style.display='none';
+    appEl.classList.add('ready');
+    appEl.style.display='block';
+    try{log('Kuingia kwenye mfumo')}catch(e){}
+    try{renderAll()}catch(e){console.error('Omega render error:',e)}
+    // Speak once only when login succeeds.
+    setTimeout(welcomeSound,120);
+  }else{
+    errEl.textContent='Nywila si sahihi.';
+  }
+}
+function login(){doLogin()}
+function logout(){
+  const appEl=document.getElementById('app');
+  const loginEl=document.getElementById('login');
+  const passEl=document.getElementById('loginPass');
+  appEl.style.display='none';
+  appEl.classList.remove('ready');
+  loginEl.classList.remove('hidden');
+  loginEl.style.display='grid';
+  passEl.value='';
+  try{log('Kutoka kwenye mfumo')}catch(e){}
+}
+function go(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');else document.querySelector(`.nav button[onclick*="'${id}'"]`)?.classList.add('active');topTitle.textContent=({dashboard:'Omega Mobile Money 👋',transactions:'Miamala',customers:'Wateja',orders:'Oda',payments:'Malipo',payouts:'Payouts',reports:'Ripoti',sms:'SMS',locations:'Kata / Maeneo',users:'Watumiaji & Majukumu',settings:'Mipangilio',password:'Badilisha Nywila',logs:'Rekodi za Shughuli',help:'Msaada'})[id]||'Omega';sidebar.classList.remove('open');renderAll()}
+function save(){localStorage.setItem(TXKEY,JSON.stringify(tx));localStorage.setItem(CKEY,JSON.stringify(customers));localStorage.setItem(OKEY,JSON.stringify(orders))}
+function log(s){logs.unshift({s,t:new Date().toLocaleString('sw-TZ')});logs=logs.slice(0,100);localStorage.setItem(LKEY,JSON.stringify(logs))}
+function toast(s){toastEl=document.getElementById('toast');toastEl.textContent=s;toastEl.style.display='block';setTimeout(()=>toastEl.style.display='none',2500)}
+function openModal(content){modalContent.innerHTML=content;modalbg.style.display='grid'}
+function closeModal(){modalbg.style.display='none'}
+function openTx(){openModal(`<h3>+ Muamala Mpya</h3><div class="form"><div><label>Mtandao</label><select id="mNet"><option>M-Pesa</option><option>Airtel Money</option><option>Mixx by Yas</option><option>HaloPesa</option></select></div><div><label>Transaction ID</label><input id="mId" placeholder="MP123456"></div><div><label>Namba</label><input id="mPhone" placeholder="07xxxxxxxx"></div><div><label>Kiasi</label><input id="mAmt" type="number" placeholder="50000"></div><div><label>Commission</label><input id="mComm" type="number" placeholder="0"></div><div><label>Gharama</label><input id="mCost" type="number" placeholder="0"></div><div><label>Hali</label><select id="mStatus"><option>Imekamilika</option><option>Inasubiri</option><option>Imeshindikana</option></select></div><div><label>Tarehe</label><input id="mDate" type="datetime-local" value="${new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)}"></div><div><button class="btn success" onclick="saveTx()">Hifadhi</button></div></div>`)}
+function saveTx(){let x={network:mNet.value,id:mId.value.trim(),phone:mPhone.value.trim(),amount:+mAmt.value||0,comm:+mComm.value||0,cost:+mCost.value||0,status:mStatus.value,date:new Date(mDate.value||Date.now()).toISOString()};if(!x.id||!x.amount)return toast('Weka Transaction ID na kiasi.');if(tx.some(a=>a.id===x.id))return toast('Transaction ID tayari ipo.');tx.push(x);save();log('Umeongeza muamala '+x.id);closeModal();renderAll();toast('Muamala umehifadhiwa.')}
+function openCustomer(){openModal(`<h3>+ Ongeza Mteja</h3><div class="form"><div class="full"><label>Jina</label><input id="cName" placeholder="Jina la mteja"></div><div><label>Namba</label><input id="cPhone" placeholder="07xxxxxxxx"></div><div><label>Kata / Eneo</label><input id="cArea" placeholder="Jaza mwenyewe"></div><div><button class="btn success" onclick="saveCustomer()">Hifadhi</button></div></div>`)}
+function saveCustomer(){if(!cName.value||!cPhone.value)return toast('Jaza jina na namba.');customers.push({name:cName.value,phone:cPhone.value,area:cArea.value,date:new Date().toISOString()});save();log('Umeongeza mteja '+cName.value);closeModal();renderAll();toast('Mteja ameongezwa.')}
+function openOrder(){openModal(`<h3>+ Oda Mpya</h3><div class="form"><div><label>Namba ya Oda</label><input id="oId" value="ORD-${Date.now().toString().slice(-6)}"></div><div><label>Mteja</label><input id="oCustomer" placeholder="Jina la mteja"></div><div><label>Kiasi</label><input id="oAmt" type="number"></div><div><label>Status</label><select id="oStatus"><option>Imekamilika</option><option>Inasubiri</option><option>Imeshindikana</option></select></div><div><button class="btn success" onclick="saveOrder()">Hifadhi</button></div></div>`)}
+function saveOrder(){if(!oCustomer.value||!oAmt.value)return toast('Jaza mteja na kiasi.');orders.push({id:oId.value,customer:oCustomer.value,amount:+oAmt.value,status:oStatus.value,date:new Date().toISOString()});save();log('Umeongeza oda '+oId.value);closeModal();renderAll();toast('Oda imehifadhiwa.')}
+function renderAll(){renderDashboard();renderTransactions();renderCustomers();renderOrders();renderReports();renderLocations();renderUsers();renderLogs();renderPayouts();renderPayments()}
+function successTx(){return tx.filter(x=>x.status==='Imekamilika')}
+function today(a){let d=new Date(),q=new Date(a);return d.toDateString()===q.toDateString()}
+function month(a){let d=new Date(),q=new Date(a);return d.getFullYear()===q.getFullYear()&&d.getMonth()===q.getMonth()}
+function total(a,k='amount'){return a.reduce((s,x)=>s+(+x[k]||0),0)}
+function renderDashboard(){let t=successTx().filter(x=>today(x.date)),m=successTx().filter(x=>month(x.date));todayAmount.textContent=money(total(t));monthAmount.textContent=money(total(m));customerCount.textContent=customers.length;orderCount.textContent=orders.filter(x=>x.status==='Imekamilika').length;recent.innerHTML=tx.slice().sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5).map(x=>`<div class="recent"><div class="ricon">${x.status==='Imeshindikana'?'×':'↑'}</div><div class="rmain"><strong>${x.phone||'—'}</strong><small>${x.network} • ${x.id}</small></div><span class="amount ${x.status==='Imeshindikana'?'red':''}">${money(x.amount)}</span><span class="badge ${x.status==='Imeshindikana'?'red':''}">${x.status}</span></div>`).join('')||'<div class="empty">Hakuna miamala bado.</div>';renderChart()}
+function renderChart(){let vals=[.6,1.7,1.9,1.6,2.7,2.1,2.0,3.2,3.5,2.9,3.1,1.8,2.8,2.5,2.7,3.9,3.7,4.0],max=5;let pts=vals.map((v,i)=>`${30+i*(650/(vals.length-1))},${205-(v/max*170)}`);line.setAttribute('d','M'+pts.join(' L'));area.setAttribute('d','M'+pts.join(' L')+' L680,205 L30,205 Z');points.innerHTML=pts.map(p=>{let [x,y]=p.split(',');return `<circle cx="${x}" cy="${y}" r="3" fill="#fff" stroke="#2980ff" stroke-width="2"/>`}).join('')}
+function renderTransactions(){let q=(txSearch?.value||'').toLowerCase(),n=txNetwork?.value||'',s=txStatus?.value||'';let a=tx.filter(x=>(!q||x.id.toLowerCase().includes(q)||x.phone.toLowerCase().includes(q))&&(!n||x.network===n)&&(!s||x.status===s)).sort((a,b)=>new Date(b.date)-new Date(a.date));txTable.innerHTML=a.length?a.map(x=>`<tr><td>${new Date(x.date).toLocaleString('sw-TZ')}</td><td>${x.network}</td><td>${x.id}</td><td>${x.phone}</td><td>${money(x.amount)}</td><td>${money(x.comm)}</td><td>${money(x.comm-x.cost)}</td><td><span class="badge ${x.status==='Imeshindikana'?'red':''}">${x.status}</span></td></tr>`).join(''):'<tr><td colspan="8" class="empty">Hakuna miamala.</td></tr>'}
+function renderCustomers(){let q=(custSearch?.value||'').toLowerCase();let a=customers.filter(x=>x.name.toLowerCase().includes(q)||x.phone.includes(q));custTable.innerHTML=a.length?a.map(x=>`<tr><td>${x.name}</td><td>${x.phone}</td><td>${x.area||'—'}</td><td>${tx.filter(t=>t.phone===x.phone).length}</td><td>${new Date(x.date).toLocaleDateString('sw-TZ')}</td></tr>`).join(''):'<tr><td colspan="5" class="empty">Hakuna wateja.</td></tr>'}
+function renderOrders(){orderTable.innerHTML=orders.length?orders.slice().reverse().map(x=>`<tr><td>${x.id}</td><td>${x.customer}</td><td>${money(x.amount)}</td><td><span class="badge ${x.status==='Imeshindikana'?'red':''}">${x.status}</span></td><td>${new Date(x.date).toLocaleString('sw-TZ')}</td></tr>`).join(''):'<tr><td colspan="5" class="empty">Hakuna oda.</td></tr>'}
+function renderReports(){let t=successTx().filter(x=>today(x.date)),m=successTx().filter(x=>month(x.date));repToday.textContent=money(total(t));repMonth.textContent=money(total(m));repComm.textContent=money(total(m,'comm'));repProfit.textContent=money(m.reduce((s,x)=>s+x.comm-x.cost,0));networkReport.innerHTML=['M-Pesa','Airtel Money','Mixx by Yas','HaloPesa'].map(n=>{let a=m.filter(x=>x.network===n);return `<div class="statusrow"><span>${n}</span><span>${a.length} miamala • ${money(total(a))} • Commission ${money(total(a,'comm'))}</span></div>`}).join('')}
+function renderPayments(){let a=successTx();payCount.textContent=a.length;payAmount.textContent=money(total(a))}
+function renderPayouts(){payoutTable.innerHTML=successTx().slice(-10).map(x=>`<tr><td>PO-${x.id}</td><td>${x.phone}</td><td>${money(x.amount)}</td><td><span class="badge">Imekamilika</span></td></tr>`).join('')||'<tr><td colspan="4" class="empty">Hakuna payouts.</td></tr>'}
+function renderLocations(){let ls=['Kata ya Kati','Kata ya Mwembe','Kata ya Mji Mpya'];locationsList.innerHTML=ls.map((x,i)=>`<div class="statusrow"><span>⌖ ${x}</span><span class="muted">Eneo ${i+1}</span></div>`).join('')}
+function renderUsers(){usersList.innerHTML=`<div class="statusrow"><span>Ω Omega</span><span class="online">Mmiliki / Super Admin</span></div><div class="statusrow"><span>Mtumiaji</span><span class="muted">Mfanyakazi</span></div>`}
+function renderLogs(){logsList.innerHTML=logs.map(x=>`<div class="statusrow"><span>${x.s}</span><span class="muted">${x.t}</span></div>`).join('')||'<div class="empty">Hakuna rekodi.</div>'}
+function addLocation(){let n=prompt('Andika jina la Kata/Eneo:');if(n){log('Umeongeza eneo '+n);toast('Eneo limeongezwa kwenye rekodi.');renderLogs()}}
+function addUser(){let n=prompt('Jina la mtumiaji:');if(n){log('Umeongeza mtumiaji '+n);toast('Mtumiaji ameongezwa.');renderLogs()}}
+function sendSMS(){if(!smsPhone.value||!smsText.value)return toast('Jaza namba na ujumbe.');log('Umeandaa SMS kwa '+smsPhone.value);toast('SMS imeandaliwa. Live sending itahitaji gateway API.');smsPhone.value=smsText.value=''}
+function changePassword(){if(oldPass.value!==localStorage.getItem(PASSKEY))return passMsg.textContent='Nywila ya sasa si sahihi.';if(newPass.value.length<6)return passMsg.textContent='Nywila mpya iwe na angalau herufi 6.';if(newPass.value!==newPass2.value)return passMsg.textContent='Nywila hazifanani.';localStorage.setItem(PASSKEY,newPass.value);log('Umebadilisha nywila');passMsg.textContent='✅ Nywila imebadilishwa.';oldPass.value=newPass.value=newPass2.value=''}
+function backup(){let data={transactions:tx,customers,orders,logs};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='omega_backup.json';a.click();log('Umefanya backup');toast('Backup imepakuliwa.')}
+function omegaSoundOn(){return localStorage.getItem('omega_sound')!=='off'}
+function updateSoundUI(){const on=omegaSoundOn();const c=document.getElementById('soundToggle');const b=document.getElementById('soundBtn');if(c)c.checked=on;if(b){b.textContent=on?'🔊':'🔇';b.classList.toggle('off',!on);b.title=on?'Zima sauti':'Washa sauti'}}
+function toggleOmegaSound(){const on=omegaSoundOn();if(on){localStorage.setItem('omega_sound','off');try{window.speechSynthesis.cancel()}catch(e){}}else{localStorage.setItem('omega_sound','on');setTimeout(speakOmega,50)}updateSoundUI()}
+function speakOmega(){if(!omegaSoundOn())return;try{if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance('Welcome to Omega Mobile Money');u.lang='en-US';u.rate=.9;u.pitch=1.05;u.volume=1;window.speechSynthesis.speak(u)}catch(e){}}
+function welcomeSound(){if(!omegaSoundOn())return;speakOmega();try{let C=window.AudioContext||window.webkitAudioContext;if(!C)return;let c=new C(),g=c.createGain(),o=c.createOscillator();o.type='sine';o.frequency.setValueAtTime(392,c.currentTime);o.frequency.exponentialRampToValueAtTime(784,c.currentTime+.3);o.frequency.exponentialRampToValueAtTime(523,c.currentTime+.65);g.gain.setValueAtTime(.001,c.currentTime);g.gain.exponentialRampToValueAtTime(.12,c.currentTime+.05);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+1.1);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+1.15)}catch(e){}}
+document.addEventListener('change',function(e){if(e.target && e.target.id==='soundToggle'){localStorage.setItem('omega_sound',e.target.checked?'on':'off');if(!e.target.checked){try{window.speechSynthesis.cancel()}catch(x){}}updateSoundUI()}});
+window.addEventListener('DOMContentLoaded',function(){updateSoundUI()});
+</script>
+</body>
+</html>
